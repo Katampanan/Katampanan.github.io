@@ -1,11 +1,117 @@
 <index html>
-<html>
+<html lang="id">
 <head>
-    <title>Soma Edy Katampanan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma Edy Katampanan - Admin</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #58a6ff;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            color: #8b949e;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .card h2 {
+            color: #7ee787;
+            margin-top: 0;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 10px;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-badge {
+            background-color: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 15px;
+            padding: 5px 15px;
+            font-size: 0.9em;
+            color: #c9d1d9;
+        }
+        .footer {
+            text-align: center;
+            color: #484f58;
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body style="background-color: #1a1a1a; color: #00ff00; font-family: monospace; text-align: center; padding-top: 100px;">
-    <h1>System Administrator Panel</h1>
-    <h2>Soma Edy Katampanan</h2>
-    <p>Website ini sedang dalam tahap pengembangan...</p>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Soma Edy Katampanan</h1>
+            <p>System Administrator & Tech Enthusiast</p>
+        </div>
+
+        <div class="card">
+            <h2>Tentang Saya</h2>
+            <p>Halo! Saya Soma Edy Katampanan. Seorang admin yang antusias dalam manajemen server, jaringan, dan keamanan sistem. Saat ini sedang mendalami implementasi sistem yang efisien dan aman.</p>
+        </div>
+
+        <div class="card">
+            <h2>Keahlian (Skills)</h2>
+            <div class="skills">
+                <span class="skill-badge">Linux</span>
+                <span class="skill-badge">Windows Server</span>
+                <span class="skill-badge">Networking</span>
+                <span class="skill-badge">Cloudflare</span>
+                <span class="skill-badge">GitHub</span>
+                <span class="skill-badge">Docker</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Hubungi Saya</h2>
+            <p>Email: <a href="mailto:Katampanan@outlook.com">Katampanan@outlook.com</a></p>
+            <p>GitHub: <a href="https://github.com/Katampanan" target="_blank">github.com/Katampanan</a></p>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 Soma Edy Katampanan. All Rights Reserved.
+        </div>
+    </div>
 </body>
 </html>
