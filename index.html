@@ -3,229 +3,990 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soma Edy Katampanan - Document Control Admin</title>
-    <!-- Link untuk memanggil ikon dari Font Awesome -->
+    <title>Soma Edy Katampanan — Administration & Document Control Professional</title>
+    
+    <!-- Fonts: Playfair Display for headings, Inter for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for clean, minimal icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* =========================================
+           DESIGN SYSTEM & VARIABLES
+           ========================================= */
+        :root {
+            --bg-deep: #0A192F;          /* Deep Navy */
+            --bg-surface: #112240;       /* Charcoal Navy */
+            --bg-light: #1E2D3D;         /* Subtle metallic gray-blue */
+            --text-primary: #CCD6F6;     /* Off-white / Light Gray-Blue */
+            --text-secondary: #8892B0;   /* Metallic Gray */
+            --text-highlight: #FFFFFF;   /* Pure White */
+            --accent-color: #C7A464;     /* Muted Premium Gold for subtle accents */
+            --border-color: #233554;     /* Thin border color */
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* =========================================
+           RESET & BASE STYLES
+           ========================================= */
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            padding-top: 50px;
-            padding-bottom: 50px;
+            box-sizing: border-box;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text-highlight);
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           LAYOUT UTILITIES
+           ========================================= */
         .container {
-            max-width: 800px;
-            width: 90%;
-            padding: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 50px;
         }
-        .header {
-            text-align: center;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+
+        section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border-color);
         }
-        .header .profile-icon {
-            font-size: 4em;
-            color: #58a6ff;
-            margin-bottom: 15px;
-        }
-        .header h1 {
-            color: #ffffff;
-            margin: 0;
-            font-size: 2.5em;
-        }
-        .header h2 {
-            color: #8b949e;
-            font-size: 1.2em;
-            font-weight: normal;
-            margin-top: 10px;
-        }
-        .card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        .card-title {
+
+        .section-header {
             display: flex;
             align-items: center;
-            color: #7ee787;
-            margin-top: 0;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 10px;
-            font-size: 1.3em;
+            margin-bottom: 50px;
         }
-        .card-title i {
-            margin-right: 10px;
-            color: #58a6ff;
+
+        .section-number {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-right: 15px;
+            font-weight: 500;
         }
-        p {
-            line-height: 1.6;
+
+        .section-title {
+            font-size: 2rem;
+            white-space: nowrap;
         }
-        .grid-2 {
+
+        .section-line {
+            width: 300px;
+            height: 1px;
+            background-color: var(--border-color);
+            margin-left: 20px;
+        }
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            padding: 15px 50px;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 1.1rem; /* Adjusted for longer name */
+            font-weight: 700;
+            color: var(--text-highlight);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 0;
+            border-top: none;
+            position: relative;
+        }
+
+        /* Abstract geometric background grid */
+        .hero-grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.3;
+            z-index: -1;
+            mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 100%);
+        }
+
+        .hero-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem); /* Responsive size for long name */
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .hero-text h2 {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .hero-headline {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            max-width: 500px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            font-family: var(--font-heading);
+        }
+
+        .hero-intro {
+            max-width: 480px;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        .cta-group {
+            display: flex;
             gap: 20px;
         }
-        @media (max-width: 600px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
+
+        .btn {
+            padding: 15px 30px;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            font-weight: 600;
         }
-        .service-item {
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--bg-deep);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(199, 164, 100, 0.1);
+        }
+
+        /* Portrait Placeholder */
+        .portrait-area {
             display: flex;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portrait-placeholder {
+            width: 300px;
+            height: 380px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-surface);
+            position: relative;
+        }
+
+        .portrait-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .portrait-placeholder i {
+            font-size: 3rem;
+            color: var(--text-secondary);
             margin-bottom: 15px;
         }
-        .service-item i {
-            font-size: 1.5em;
-            color: #d2a8ff;
-            margin-right: 15px;
-            margin-top: 3px;
+
+        .portrait-placeholder span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
         }
-        .service-item h3 {
-            margin: 0;
-            color: #c9d1d9;
-            font-size: 1.1em;
+
+        /* =========================================
+           ABOUT SECTION
+           ========================================= */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
         }
-        .service-item p {
-            margin: 5px 0 0 0;
-            font-size: 0.9em;
-            color: #8b949e;
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
         }
-        .skills {
+
+        .about-stats {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            flex-direction: column;
+            gap: 20px;
+            border-left: 1px solid var(--border-color);
+            padding-left: 30px;
         }
-        .skill-badge {
-            background-color: #21262d;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 8px 15px;
-            font-size: 0.95em;
-            color: #c9d1d9;
-            display: flex;
-            align-items: center;
+
+        .stat-item h4 {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
         }
-        .skill-badge i {
-            margin-right: 8px;
-            color: #f0edcc; /* Warna kuning teal/office */
+
+        .stat-item p {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
         }
-        .footer {
-            text-align: center;
-            color: #484f58;
-            font-size: 0.9em;
-            margin-top: 30px;
+
+        /* =========================================
+           HOW I WORK
+           ========================================= */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
         }
-        a {
-            color: #58a6ff;
-            text-decoration: none;
+
+        .principle-card {
+            padding: 30px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
         }
-        a:hover {
-            text-decoration: underline;
+
+        .principle-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
         }
-        .contact-info {
-            display: flex;
-            align-items: center;
+
+        .principle-number {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .principle-card h4 {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-highlight);
+        }
+
+        .principle-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================
+           EXPERIENCE TIMELINE
+           ========================================= */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 50px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            box-shadow: 0 0 0 4px var(--bg-deep);
+        }
+
+        .job-status {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 2px 8px;
+            border-radius: 2px;
             margin-bottom: 10px;
         }
-        .contact-info i {
-            color: #7ee787;
-            font-size: 1.2em;
-            margin-right: 15px;
-            width: 20px;
+
+        .job-title {
+            font-family: var(--font-body);
+            font-size: 1.3rem;
+            color: var(--text-highlight);
+            margin-bottom: 5px;
+        }
+
+        .company-name {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .job-details {
+            list-style: none;
+        }
+
+        .job-details li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .job-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* =========================================
+           SKILLS SECTION
+           ========================================= */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .skill-category h3 {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .tag:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            background: rgba(199, 164, 100, 0.05);
+        }
+
+        /* =========================================
+           PROJECTS SECTION
+           ========================================= */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--text-secondary);
+        }
+
+        .project-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .project-card h4 {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================
+           EDUCATION SECTION
+           ========================================= */
+        .education-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .edu-card {
+            border: 1px solid var(--border-color);
+            padding: 30px;
+        }
+
+        .edu-card h4 {
+            font-family: var(--font-body);
+            margin-bottom: 5px;
+        }
+
+        .edu-year {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .toefl-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 30px;
             text-align: center;
+        }
+
+        .toefl-score {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--text-highlight);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .toefl-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================
+           CONTACT SECTION
+           ========================================= */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-content p {
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-link i {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .contact-link span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            padding: 30px 50px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer .footer-name {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            display: block;
+            font-size: 1.2rem;
+        }
+
+        /* =========================================
+           ANIMATIONS & RESPONSIVE
+           ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .container { padding: 0 25px; }
+            section { padding: 80px 0; }
+            
+            nav { padding: 15px 25px; }
+            .nav-links { display: none; } /* Simplified for mobile */
+            
+            .hero-container, .about-grid, .skills-wrapper, .education-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 { font-size: 2rem; }
+            .hero-headline { font-size: 1.1rem; }
+            .portrait-area { margin-top: 50px; }
+            
+            .principles-grid { grid-template-columns: 1fr 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            
+            .section-line { width: 100px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        
-        <!-- Bagian Header / Profil -->
-        <div class="header">
-            <div class="profile-icon"><i class="fas fa-user-tie"></i></div>
-            <h1>Soma Edy Katampanan</h1>
-            <h2><i class="fas fa-folder-open"></i> Admin Document Control</h2>
-        </div>
 
-        <!-- Bagian Tentang Saya -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-id-card"></i> Tentang Saya</div>
-            <p>Halo, saya Soma. Saat ini saya bekerja sebagai <strong>Admin Document Control</strong>. Saya bertanggung jawab atas pengelolaan, pengarsipan, dan distribusi dokumen secara sistematis untuk memastikan kelancaran alur kerja di perusahaan. Saya memiliki ketelitian tinggi dan memahami standar pengelolaan dokumen yang baik dan benar.</p>
-        </div>
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="nav-logo">Soma Edy Katampanan</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-        <!-- Bagian Layanan / Apa yang Dikerjakan (Grid 2 Kolom) -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-tasks"></i> Ruang Lingkup Pekerjaan</div>
-            <div class="grid-2">
-                <div class="service-item">
-                    <i class="fas fa-file-signature"></i>
-                    <div>
-                        <h3>Pengelolaan Dokumen</h3>
-                        <p>Membuat, merevisi, dan mendistribusikan dokumen resmi perusahaan.</p>
-                    </div>
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="container hero-container">
+            <div class="hero-text">
+                <h2>Administration & Document Control Professional</h2>
+                <h1>Soma Edy Katampanan</h1>
+                <p class="hero-headline">Building better workflows through organized data, documentation, and continuous learning.</p>
+                <p class="hero-intro">An adaptable management graduate with hands-on experience in administration, warehouse documentation, document control, and digital workflows.</p>
+                <div class="cta-group">
+                    <a href="#experience" class="btn btn-primary">View My Experience</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
                 </div>
-                <div class="service-item">
-                    <i class="fas fa-box-archive"></i>
-                    <div>
-                        <h3>Pengarsipan</h3>
-                        <p>Menyimpan dan mengarsipkan dokumen fisik maupun digital secara rapi dan aman.</p>
-                    </div>
+            </div>
+            <div class="hero-image portrait-area">
+                <!-- Elegant placeholder. Replace with <img> tag when photo is ready -->
+                <div class="portrait-placeholder">
+                    <i class="far fa-user"></i>
+                    <span>Professional Portrait</span>
                 </div>
-                <div class="service-item">
-                    <i class="fas fa-search"></i>
-                    <div>
-                        <h3>Verifikasi Data</h3>
-                        <p>Memastikan kesesuaian data dan kelengkapan dokumen sebelum disetujui.</p>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-number">01.</span>
+                <h3 class="section-title">About</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>Hello, I am Soma Edy Katampanan. I graduated with a Bachelor's degree in Management in 2023, stepping into the professional world with a strong foundation in administrative systems and organizational processes.</p>
+                    <p>My career began in warehouse administration, where I learned the critical importance of accuracy in inventory and data checking. Currently, I am expanding my expertise at <strong>PT Pintek Sukses Indonesia</strong>, focusing on document control and digital workflows within a corporate technical environment.</p>
+                    <p>I am deeply interested in how organized documentation and structured administrative systems can improve business operations. I approach my work with a mindset of continuous learning, always looking for ways to optimize workflows and contribute meaningfully to the team.</p>
                 </div>
-                <div class="service-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <div>
-                        <h3>Keamanan Dokumen</h3>
-                        <p>Menjaga kerahasiaan dan mengatur akses terhadap dokumen sensitif.</p>
+                <div class="about-stats reveal">
+                    <div class="stat-item">
+                        <h4>Focus</h4>
+                        <p>Document Control & Administration</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Current Company</h4>
+                        <p>PT Pintek Sukses Indonesia</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Languages</h4>
+                        <p>Bahasa Indonesia, English (Professional)</p>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Bagian Tools / Software yang Dikuasai -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-tools"></i> Tools & Software</div>
-            <div class="skills">
-                <span class="skill-badge"><i class="fas fa-file-word"></i> Microsoft Word</span>
-                <span class="skill-badge"><i class="fas fa-file-excel"></i> Microsoft Excel</span>
-                <span class="skill-badge"><i class="fas fa-file-powerpoint"></i> MS PowerPoint</span>
-                <span class="skill-badge"><i class="fas fa-file-pdf"></i> Adobe PDF</span>
-                <span class="skill-badge"><i class="fab fa-google-drive"></i> Google Workspace</span>
-                <span class="skill-badge"><i class="fas fa-cloud"></i> Cloud Storage</span>
+    <!-- HOW I WORK -->
+    <section id="how-i-work" style="background-color: var(--bg-deep);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-number">02.</span>
+                <h3 class="section-title">How I Work</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="principles-grid">
+                <div class="principle-card reveal">
+                    <span class="principle-number">01</span>
+                    <h4>Organized</h4>
+                    <p>I believe good documentation creates better decisions.</p>
+                </div>
+                <div class="principle-card reveal">
+                    <span class="principle-number">02</span>
+                    <h4>Responsible</h4>
+                    <p>I take ownership of the work entrusted to me.</p>
+                </div>
+                <div class="principle-card reveal">
+                    <span class="principle-number">03</span>
+                    <h4>Adaptable</h4>
+                    <p>I learn quickly and adapt to new systems and environments.</p>
+                </div>
+                <div class="principle-card reveal">
+                    <span class="principle-number">04</span>
+                    <h4>Continuous Learning</h4>
+                    <p>I continuously improve my skills through real work and practical experience.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Bagian Kontak -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-envelope"></i> Hubungi Saya</div>
-            <div class="contact-info">
-                <i class="fas fa-envelope"></i>
-                <a href="mailto:Katampanan@outlook.com">Katampanan@outlook.com</a>
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-number">03.</span>
+                <h3 class="section-title">Experience</h3>
+                <div class="section-line"></div>
             </div>
-            <div class="contact-info">
-                <i class="fab fa-github"></i>
-                <a href="https://github.com/Katampanan" target="_blank">github.com/Katampanan</a>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="job-status">Current</div>
+                    <h4 class="job-title">Admin / Document Control</h4>
+                    <p class="company-name">PT Pintek Sukses Indonesia</p>
+                    <ul class="job-details">
+                        <li>Document & Data Control</li>
+                        <li>Administrative Support</li>
+                        <li>Equipment Documentation</li>
+                        <li>Inventory / Equipment Records</li>
+                        <li>Digital Documentation</li>
+                        <li>Corporate Administrative Support</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="job-status" style="color: var(--text-secondary); border-color: var(--text-secondary);">Previous Experience</div>
+                    <h4 class="job-title">Admin Control Gudang / Warehouse Administration</h4>
+                    <p class="company-name">PT Midi Utama Indonesia (Alfamidi)</p>
+                    <ul class="job-details">
+                        <li>Controlling incoming and outgoing goods documentation</li>
+                        <li>Checking data and quantities</li>
+                        <li>Supporting warehouse administration</li>
+                        <li>Reducing input/documentation errors</li>
+                    </ul>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="footer">
-            &copy; 2024 Soma Edy Katampanan. All Rights Reserved.
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-number">04.</span>
+                <h3 class="section-title">Skills</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-wrapper">
+                <div class="skill-category reveal">
+                    <h3>Technical & Professional</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Document Control</span>
+                        <span class="tag">Data Entry</span>
+                        <span class="tag">Microsoft Excel</span>
+                        <span class="tag">Microsoft Word</span>
+                        <span class="tag">Administrative Management</span>
+                        <span class="tag">Inventory Documentation</span>
+                        <span class="tag">Data Organization</span>
+                        <span class="tag">Digital Documentation</span>
+                        <span class="tag">Office Administration</span>
+                        <span class="tag">Basic Website / Digital Admin</span>
+                        <span class="tag">Social Media Administration</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Adaptability</span>
+                        <span class="tag">Responsibility</span>
+                        <span class="tag">Discipline</span>
+                        <span class="tag">Attention to Detail</span>
+                        <span class="tag">Teamwork</span>
+                        <span class="tag">Independent Work</span>
+                        <span class="tag">Problem Solving</span>
+                        <span class="tag">Working Under Pressure</span>
+                        <span class="tag">Continuous Learning</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-number">05.</span>
+                <h3 class="section-title">Selected Projects</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fas fa-globe"></i></div>
+                    <h4>Company Website Initiative</h4>
+                    <p>Supporting the development and organization of a professional company website and digital company presence.</p>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h4>Equipment & Calibration Inventory System</h4>
+                    <p>Developing an organized Excel-based system for equipment records, calibration status, expiry monitoring, purchasing status, and administrative tracking.</p>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fas fa-folder-open"></i></div>
+                    <h4>Document Control & Quality Documentation</h4>
+                    <p>Supporting organization and management of company documentation and quality-system related documents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-number">06.</span>
+                <h3 class="section-title">Education</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="education-wrapper">
+                <div class="edu-card reveal">
+                    <h4>S1 Manajemen</h4>
+                    <span class="edu-year">Graduated 2023</span>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Universitas Kristen Indonesia Toraja</p>
+                </div>
+                <div class="toefl-card reveal">
+                    <span class="toefl-score">530</span>
+                    <span class="toefl-label">TOEFL ITP Score</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content reveal">
+                <h2>Let's Connect</h2>
+                <p>Open to professional opportunities, collaboration, and meaningful conversations.</p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com" class="contact-link">
+                        <i class="far fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                    <a href="#" class="contact-link">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Phone</span>
+                    </a>
+                    <a href="#" class="contact-link">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="#" class="contact-link">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Indonesia</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-name">Soma Edy Katampanan</div>
+        <p>Administration • Document Control • Data Management</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">© 2026 Soma Edy Katampanan. All rights reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT FOR INTERACTIONS -->
+    <script>
+        // Navbar scroll effect
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal animation using IntersectionObserver
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+    </script>
 </body>
 </html>
